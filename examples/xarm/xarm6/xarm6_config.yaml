@@ -1,0 +1,8 @@
+type: xarm                  
+id: my_xarm6  #change me
+dof: 6
+initial_joints: [0., 0., 0., 0., 0., 0.] #change me
+tcp_offset: [0., 0., 0., 0., 0., 0.,] #change me
+sdk_kwargs:
+  port: "192.168.1.235" #change me
+  is_radian: False #change me

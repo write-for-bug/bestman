@@ -1,0 +1,8 @@
+# bestman/assets/configs/xarm_template.yaml
+
+robot:
+  type: xarm
+  id: "BestmanXarm6"
+  sdk_kwargs:
+    ip: "192.168.1.224"  # e.g., "192.168.1.224"
+  dof: 6

@@ -1,0 +1,70 @@
+[project]
+name = "bestman"
+version = "0.1.0"
+description = "Unified Python wrapper for robotic arm SDKs — enabling consistent control, motion, camera and gripper operations.(maybe future)"
+readme = "README.md"
+authors = [
+  {name = "ark", email = "zlj15058114997@gmail.com"}
+]
+maintainers = [
+  {name = "ark", email = "zlj15058114997@gmail.com"}
+]
+classifiers = [
+    # TODO
+]
+license = {text = "MIT"}
+dependencies = [
+  "typer",
+  "draccus",
+  "numpy",
+  "scipy",
+
+]
+requires-python = ">= 3.10"
+
+[project.optional-dependencies]
+
+xarm = ["xarm-python-sdk"]          # pip install bestman[xarm]
+piper = ["piper-sdk"]               # pip install bestman[piper] 
+ros = ["rclpy"]                     # pip install bestman[ros]
+
+all = ["xarm", "piper","ros"]
+
+
+
+test = [
+    "coverage",  # testing
+    "pytest",  # testing
+    "ruff",  # linting
+    "ty", # checking types
+    "ipdb", # debugging
+]
+
+[project.urls]
+bugs = "https://github.com/write-for-bug/bestman/issues"
+changelog = "https://github.com/write-for-bug/bestman/blob/master/changelog.md"
+homepage = "https://github.com/write-for-bug/bestman"
+
+[project.scripts]
+bestman = "bestman.cli:app"
+
+[tool.ty]
+# All rules are enabled as "error" by default; no need to specify unless overriding.
+# Example override: relax a rule for the entire project (uncomment if needed).
+# rules.TY015 = "warn"  # For invalid-argument-type, warn instead of error.
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+]
+
+[tool.uv]
+package = true
