@@ -1,5 +1,4 @@
-from bestman.robots.xarm import XArmConfig
-from bestman.robots.xarm import BestmanXarm
+from bestman.robots.xarm import XArmConfig,BestmanXarm
 from bestman.robots import make_robot_from_config
 import time
 

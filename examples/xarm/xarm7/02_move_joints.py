@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-import draccus
+
 from bestman.robots import (
     RobotConfig,
     make_robot_from_config,
@@ -7,13 +7,14 @@ from bestman.robots import (
 from bestman.robots.xarm import BestmanXarm,XArmConfig
 import time
 # 两种方法初始化config
+# import draccus
 # config = draccus.parse(RobotConfig, config_path="./configs/xarm7_config.yaml")
 
 config = XArmConfig(
     id="my_xarm",
     dof=7,
     initial_joints=[0., 0., 0., 0., -180., 90., -180.],
-    # tcp_offset=[0,0,0,0,0,0],
+    tcp_offset=[0,0,0,0,0,0],
     sdk_kwargs={"port":"192.168.1.235","is_radian":False}
 )
 robot:BestmanXarm = make_robot_from_config(config)
@@ -28,6 +29,7 @@ i = 0
 try:
     robot.connect()
     robot.go_home()
+   
     # joint control loop
     while(True):
         robot.move_to_joint_positions(j_list[i],is_radian=False,wait=True)

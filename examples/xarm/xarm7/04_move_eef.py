@@ -40,7 +40,6 @@ try:
     
     i = 0
     while(True):
-        
         ee_pos = robot.move_to_ee_pose(pose_list[i],wait=True)
         i=(i+1)%len(pose_list)
 

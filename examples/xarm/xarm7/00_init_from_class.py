@@ -1,5 +1,4 @@
-from bestman.robots.xarm import XArmConfig
-from bestman.robots.xarm import BestmanXarm
+from bestman.robots.xarm import XArmConfig,BestmanXarm
 
 def main():
     # Xarm配置对象

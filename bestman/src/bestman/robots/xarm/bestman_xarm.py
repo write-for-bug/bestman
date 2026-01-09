@@ -57,7 +57,7 @@ class BestmanXarm(BaseRobot):
                 self.arm.set_tcp_offset(self.config.tcp_offset,wait=True)
             self.arm.motion_enable(True)
             self.arm.set_mode(0)    #速度位置模式
-            self.arm.set_state(0)    #运动状态
+            # self.arm.set_state(0)    #运动状态
         except Exception as e:
             raise e
         print(f"[{self.config.id or 'xarm6'}] Connected successfully.")
@@ -133,6 +133,8 @@ class BestmanXarm(BaseRobot):
             https://github.com/xArm-Developer/xArm-Python-SDK/blob/master/doc/api/xarm_api.md#mode
         '''
         self.arm.set_mode(mode)
+        # self.arm.motion_enable(True)
+        self.arm.set_state(0)#每次更换机械臂运动模式都要切换机械臂运动状态
 
     @property
     def mode(self):
@@ -246,22 +248,34 @@ class BestmanXarm(BaseRobot):
     ) -> bool:
         """实时关节伺服（模式 1，需高频调用）"""
         if self.mode != 1:
-            raise ValueError(f"current mode:{self.mode}manual call set_mode(1) first")
+            raise ValueError(f"current mode:{self.mode}, call set_mode(1) first")
             # self.arm.set_mode(1)
-        return self.arm.set_servo_angle(joint_positions) == 0
+        return self.arm.set_servo_angle_j(angles=joint_positions,is_radian=False) == 0
     
     def servo_to_ee_pose(
+        self,
+        pose: Union[list, np.ndarray]
+    ) -> bool:
+        """实时笛卡尔伺服（模式 1，需高频调用）"""
+        if self.mode != 1:
+            raise ValueError(f"current mode:{self.mode}, call set_mode(1) first")
+            
+        self.arm.set_servo_cartesian(mvpose=pose,is_radian=False)
+    
+    def servo_to_ee_pose_rpy(
+        self,
+        position: Union[list, np.ndarray],
+        rpy: Union[list, np.ndarray],
+    ) -> bool:
+        raise NotImplementedError()
+    
+    def servo_to_ee_pose_quat(
         self,
         position: Union[list, np.ndarray],
         orientation: Union[list, np.ndarray],
     ) -> bool:
-        """实时笛卡尔伺服（模式 1，需高频调用）"""
-        if self.mode != 1:
-            raise ValueError(f"current mode:{self.mode}manual call set_mode(1) first")
-            
-        ...
-        return self.arm.set_servo_cartesian(...) == 0
-
+        raise NotImplementedError()
+    
     def move_gripper(self, command: float) -> bool:
         """
         控制夹爪开合

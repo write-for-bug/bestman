@@ -1,19 +1,20 @@
-from bestman.robots.xarm import XArmConfig
-from bestman.robots.xarm import BestmanXarm
-from bestman.robots import make_robot_from_config
+from bestman.robots.xarm import XArmConfig,BestmanXarm
+
 import time
 # Xarm配置对象
 config = XArmConfig(
     id="my_xarm",
     dof=7,
     initial_joints=[0., 0., 0., 0., -180., 90., -180.],
-    tcp_offset=[0,0,174.435,0,0,0],
+    # tcp_offset=[0,0,174.435,0,0,0],
+    tcp_offset=[0,0,0,0,0,0],
     sdk_kwargs={"port":"192.168.1.235","is_radian":False}
 )
 
 
 robot:BestmanXarm = BestmanXarm(config)
 # or
+# from bestman.robots import make_robot_from_config
 # robot = make_robot_from_config(config)
 try:
     robot.connect()

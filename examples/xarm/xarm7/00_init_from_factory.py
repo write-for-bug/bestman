@@ -3,6 +3,7 @@ from bestman.robots import RobotConfig,make_robot_from_config
 import os
 from dataclasses import asdict
 def main():
+    # 获取config path
     script_path = os.path.abspath(__file__)
     script_dir = os.path.dirname(script_path)
     config_path = os.path.join(script_dir,"xarm7_config.yaml")
