@@ -8,7 +8,7 @@ config = XArmConfig(
     id="my_xarm",
     dof=7,  
     initial_joints=[0., 0., 0., 0., -180., 90., -180.],
-    tcp_offset=[0., 0., 174.435, 0., 0., 0.],  #单位：mm
+    tcp_offset=[0., 0., 174.435, 0., 0., 0.],  #单位：mm,夹爪中心相对末端法兰的变换
     sdk_kwargs={"port":"192.168.1.235","is_radian":False}
 )
 robot:BestmanXarm = BestmanXarm(config)
