@@ -11,7 +11,7 @@ import sys
 #     sys.path.append(so_dir)
 #     print(f"已添加.so目录到sys.path: {so_dir}")
 
-from . import startouch
+# from . import startouch
 
 
 def quaternion_to_euler_wxyz(quat: np.ndarray) -> np.ndarray:
