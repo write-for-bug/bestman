@@ -11,8 +11,11 @@ from bestman.robots.base_robot import BaseRobot
 from .startouch_config import StartouchConfig
 from ..factory import register_robot
 
-from .SDK.interface_py.startouchclass import SingleArm
-
+# from .SDK.interface_py.startouchclass import SingleArm
+try:
+    from .startouch_sdk import SingleArm
+except:
+    raise ValueError("startouch sdk not found")
 @register_robot(StartouchConfig)
 class BestmanStartouch(BaseRobot):
     """

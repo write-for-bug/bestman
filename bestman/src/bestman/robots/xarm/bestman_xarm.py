@@ -11,7 +11,7 @@ try:
     from xarm.wrapper import XArmAPI
 except ImportError:
     raise ImportError(
-        "xArm SDK not installed. Please install via: "
+        "XArm SDK not installed. Please install via: "
         "pip install bestman[xarm]"
     )
 
