@@ -239,16 +239,16 @@ robot_instance.get_joint_velocities()#返回关节速度
   > 必须高频调用（>=30Hz）,实时性要求高的场景下使用
 
   ```
-  #关节位置控制[j1,j2,j3,j4,j5,j6...]
+  #关节伺服控制[j1,j2,j3,j4,j5,j6...]
   robot_instance.servo_to_joint_positions(joint_positions,radians=False,wait=True)
   
-  #末端位置控制 pose=[x(m),y(m),z(m),roll,pitch,yaw] (deg or rad)
+  #末端伺服控制 pose=[x(m),y(m),z(m),roll,pitch,yaw] (deg or rad)
   robot_instance.servo_to_ee_pose(pose, is_radian=False, wait=False)
   
-  #末端位置控制 position=[x(m),y(m),z(m)],rpy=[roll,pitch,yaw]
+  #末端伺服控制 position=[x(m),y(m),z(m)],rpy=[roll,pitch,yaw]
   robot_instance.servo_to_ee_pose_rpy(position, rpy, is_radian=False, wait=False)
   
-  #末端位置控制 position=[x(m),y(m),z(m)], orientation=[x,y,z,w]适配umi数据格式
+  #末端伺服控制 position=[x(m),y(m),z(m)], orientation=[x,y,z,w]适配umi数据格式
   robot_instance.servo_to_ee_pose_quat(position, orientation, wait=False)
   ```
 
