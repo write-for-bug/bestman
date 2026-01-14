@@ -113,9 +113,7 @@ robot.connect()
 
 🔧 Startouch 
 
-```
-pip install bestman[startouch]
-```
+目前startouch仅在python310下提供动态链接库
 
 实例化机器人配置类：
 
@@ -161,15 +159,7 @@ cd examples
 python -c "import bestman; print(bestman.version)"
 ```
 
-
-
-💡 提示
-
-- 所有可选依赖均通过 extras_require 定义，避免不必要的包安装。
-
-- 若遇网络问题，可添加 -i https://pypi.tuna.tsinghua.edu.cn/simple 使用国内镜像。
-
-    
+  
 
 
 
@@ -178,5 +168,5 @@ python -c "import bestman; print(bestman.version)"
 
 
 
-目前只有XArm7的wrapper
+目前支持的wrapper：XArm6、XArm7、StarTouch
 

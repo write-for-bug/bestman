@@ -24,10 +24,11 @@ robot:BestmanStartouch = BestmanStartouch(config)
 try:
     robot.connect()      
     robot.go_home()     
-    
     import time
     print("Home motion completed. Waiting 5 seconds...")
     time.sleep(5)
+except Exception as e:
+    print(e)
 
 finally:
     robot.disconnect()   # 安全断开（失能机械臂）
