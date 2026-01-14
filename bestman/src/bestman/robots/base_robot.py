@@ -184,7 +184,7 @@ class BaseRobot(abc.ABC):
         """
         pass
 
-    # ======== Position Control (Mode 0) / 位置控制（模式 0） ========
+    # ======== Position Control / 位置控制（模式 0） ========
     @abc.abstractmethod
     def move_to_joint_positions(
         self,

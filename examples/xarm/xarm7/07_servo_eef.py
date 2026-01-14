@@ -26,8 +26,11 @@ try:
     i = 0
     while(True):
        print("robot mode:",robot.mode)
-       robot.servo_to_ee_pose(pose)
-       time.sleep(0.2)
+       robot.servo_to_joint_positions([0., 0., 0., 0., -180., 90., -180.])
+    
+    #    robot.arm.set_servo_cartesian(pose)
+    #    robot.servo_to_ee_pose(pose)
+       time.sleep(0.1)
        
 
 except KeyboardInterrupt:

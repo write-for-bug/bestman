@@ -25,7 +25,8 @@ requires-python = ">= 3.10"
 [project.optional-dependencies]
 
 xarm = ["xarm-python-sdk"]          # pip install bestman[xarm]
-piper = ["piper-sdk"]               # pip install bestman[piper] 
+piper = ["piper-sdk"]               # pip install bestman[piper]
+startouch = [""] 
 ros = ["rclpy"]                     # pip install bestman[ros]
 
 all = ["xarm", "piper","ros"]
