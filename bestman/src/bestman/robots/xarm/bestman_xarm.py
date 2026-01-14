@@ -301,7 +301,7 @@ class BestmanXarm(BaseRobot):
         Returns:
             (N,) List in radians
         """
-        return self.arm.angles
+        return self.arm.get_servo_angles()
 
     def get_joint_velocities(self) -> List[float]:
         """
