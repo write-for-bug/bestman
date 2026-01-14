@@ -3,10 +3,6 @@
 import sys
 import os
 
-# so_dir = "/home/lumos/bestman/bestman/src/bestman/robots/startouch"
-# sys.path.append(so_dir)
-# 调试：列出so_dir下的文件，确认.so存在
-# print("so目录下的文件：", os.listdir(so_dir))
 
 from bestman.robots.startouch import StartouchConfig,BestmanStartouch
 

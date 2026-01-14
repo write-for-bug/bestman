@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(user_app VERSION 1.0.0)
-
+add_subdirectory(src/bestman/robots/startouch/SDK)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)

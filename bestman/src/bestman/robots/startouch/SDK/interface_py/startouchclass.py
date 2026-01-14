@@ -3,15 +3,15 @@ import numpy as np
 import os
 import sys
 
-current_dir = os.path.dirname(os.path.abspath(__file__))  # other_dir目录
-project_root = os.path.dirname(current_dir)  # bestman根目录
-so_dir = os.path.join(project_root, "interface_py")  # 拼接.so目录路径
-print("so_dir:",so_dir)
-if so_dir not in sys.path:
-    sys.path.append(so_dir)
-    print(f"已添加.so目录到sys.path: {so_dir}")
+# current_dir = os.path.dirname(os.path.abspath(__file__))  # other_dir目录
+# project_root = os.path.dirname(current_dir)  # bestman根目录
+# so_dir = os.path.join(project_root, "interface_py")  # 拼接.so目录路径
+# print("so_dir:",so_dir)
+# if so_dir not in sys.path:
+#     sys.path.append(so_dir)
+#     print(f"已添加.so目录到sys.path: {so_dir}")
 
-import startouch
+from . import startouch
 
 
 def quaternion_to_euler_wxyz(quat: np.ndarray) -> np.ndarray:

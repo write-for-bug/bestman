@@ -9,6 +9,7 @@ authors = [
 maintainers = [
   {name = "ark", email = "zlj15058114997@gmail.com"}
 ]
+
 classifiers = [
     # TODO
 ]
@@ -22,11 +23,14 @@ dependencies = [
 ]
 requires-python = ">= 3.10"
 
+[tool.setuptools.package-data]
+"bestman.robots.startouch.interface_py" = ["*.so"]
+
 [project.optional-dependencies]
 
 xarm = ["xarm-python-sdk"]          # pip install bestman[xarm]
 piper = ["piper-sdk"]               # pip install bestman[piper]
-startouch = [""] 
+#startouch = [""] 
 ros = ["rclpy"]                     # pip install bestman[ros]
 
 all = ["xarm", "piper","ros"]
