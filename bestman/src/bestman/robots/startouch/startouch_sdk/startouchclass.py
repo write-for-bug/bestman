@@ -1,17 +1,40 @@
 from typing import List, Tuple, Union, Optional, Dict, Any
 import numpy as np
 import os
-# import sys
+# src/bestman/robots/startouch/startouch_sdk/__init__.py
+import importlib.util
+import os
+import glob
 
-# current_dir = os.path.dirname(os.path.abspath(__file__))  # other_dir目录
-# project_root = os.path.dirname(current_dir)  # bestman根目录
-# so_dir = os.path.join(project_root, "interface_py")  # 拼接.so目录路径
-# print("so_dir:",so_dir)
-# if so_dir not in sys.path:
-#     sys.path.append(so_dir)
-#     print(f"已添加.so目录到sys.path: {so_dir}")
+_here = os.path.dirname(__file__)
 
-# from . import startouch
+# 查找 Python 扩展模块（匹配 cpython-... 格式）
+_candidates = glob.glob(os.path.join(_here, "startouch.*cpython*.so"))
+
+if not _candidates:
+    # 兼容其他平台（可选）
+    _candidates = (
+        glob.glob(os.path.join(_here, "startouch.*.so")) +
+        glob.glob(os.path.join(_here, "startouch.*.dylib")) +
+        glob.glob(os.path.join(_here, "startouch.*.pyd"))
+    )
+    # 过滤掉 libstartouch.so
+    _candidates = [f for f in _candidates if 'libstartouch' not in os.path.basename(f)]
+
+if not _candidates:
+    raise ImportError(
+        "Startouch native Python module (.so/.dylib/.pyd) not found. "
+        "Expected file like 'startouch.cpython-310-x86_64-linux-gnu.so'."
+    )
+
+_module_path = _candidates[0]
+
+_spec = importlib.util.spec_from_file_location("startouch", _module_path)
+if _spec is None or _spec.loader is None:
+    raise ImportError(f"Failed to load module spec from {os.path.basename(_module_path)}")
+
+startouch = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(startouch)
 
 
 def quaternion_to_euler_wxyz(quat: np.ndarray) -> np.ndarray:

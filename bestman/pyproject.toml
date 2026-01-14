@@ -19,19 +19,12 @@ dependencies = [
   "draccus",
   "numpy",
   "scipy",
-
 ]
 requires-python = ">= 3.10"
 
-[build-system]
-requires = [
-    "scikit-build-core>=0.8",
-    "pybind11>=2.6",
-    "cmake>=3.20",
-    "ninja"
-]
+
 [tool.setuptools.package-data]
-"bestman.robots.startouch.interface_py" = ["*.so"]
+"bestman.robots.startouch.startouch_sdk" = ["*.so"]
 
 [project.optional-dependencies]
 
