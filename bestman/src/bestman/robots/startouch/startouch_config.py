@@ -29,11 +29,11 @@ class StartouchConfig(RobotConfig):
 
     # ========== SDK 透传参数 ==========
     sdk_kwargs: Dict[str, Any] = field(default_factory=lambda: {
-            "can_port": "can0",      # CAN 接口名称，必填
+            "can_interface_": "can0",      # CAN 接口名称，必填
         })
 
     # ========== SDK 必要参数 通信接口检查 ==========
-    necessary_kwargs: ClassVar[List[str]] = ["can_port"]
+    necessary_kwargs: ClassVar[List[str]] = ["can_interface_"]
 
     # ========== 初始化参数 ==========
     initial_joints: Optional[List[float]] = None

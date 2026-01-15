@@ -12,7 +12,7 @@ config = StartouchConfig(
     dof=6,                                          
     initial_joints=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],                          
     sdk_kwargs={
-        "can_port": "can0" 
+        "can_interface_": "can0" 
     }
 )
 
@@ -33,4 +33,3 @@ except Exception as e:
 finally:
     robot.disconnect()   # 安全断开（失能机械臂）
 
-print("Piper test completed.")

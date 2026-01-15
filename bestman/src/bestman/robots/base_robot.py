@@ -383,10 +383,25 @@ class BaseRobot(abc.ABC):
     def go_home(self) -> bool:
         """
         Move the robot to its predefined home configuration.
-        将机器人移动到预定义的“回家”位姿。
+        将机器人移动到预定义的"回家"位姿。
 
         Returns:
             bool: True if motion was successfully initiated.
                   成功启动运动则返回 True。
         """
         pass
+
+    # ======== Context Manager Support / 上下文管理器支持 ========
+    def __enter__(self) -> "BaseRobot":
+        """Context manager entry. Automatically connects the robot.
+        上下文管理器入口，自动连接机器人。
+        """
+        self.connect()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        """Context manager exit. Automatically disconnects the robot.
+        上下文管理器出口，自动断开机器人连接。
+        """
+        self.disconnect()
+        return False  # Don't suppress exceptions

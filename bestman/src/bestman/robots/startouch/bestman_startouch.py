@@ -11,11 +11,14 @@ from bestman.robots.base_robot import BaseRobot
 from .startouch_config import StartouchConfig
 from ..factory import register_robot
 
-# from .SDK.interface_py.startouchclass import SingleArm
 try:
     from .startouch_sdk import SingleArm
-except:
-    raise ValueError("startouch sdk not found")
+except ImportError as e:
+    raise ImportError(
+        "Startouch SDK not available. "
+        "Please ensure the .so files are present in the startouch_sdk directory. "
+        f"Original error: {e}"
+    ) from e
 @register_robot(StartouchConfig)
 class BestmanStartouch(BaseRobot):
     """
@@ -41,8 +44,9 @@ class BestmanStartouch(BaseRobot):
         """
         建立与 Piper 机械臂的连接
         """
-        self.arm = SingleArm(can_interface_ = "can0")
+        self.arm = SingleArm(**self.config.sdk_kwargs)
         # pass
+        print(f"[{self.config.id or 'startouch'}] Connected successfully.")
 
 
 
