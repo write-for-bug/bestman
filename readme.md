@@ -117,6 +117,10 @@ robot.connect()
 
 目前startouch仅在python310下提供动态链接库，其他版本链接库后续会放进来
 
+### IMPORTANT
+使用前需要手动激活can口！多臂使用时can口号与插拔顺序有关（can0、can1）
+sudo ip link set can0 up type can bitrate 1000000 
+
 实例化机器人配置类：
 
 ```
