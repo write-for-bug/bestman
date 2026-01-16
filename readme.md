@@ -1,6 +1,6 @@
 🚀 安装 Bestman 及机器人 SDK
 
-✅ 要求：Python ≥ 3.10
+✅ 要求：Python ≥ 3.8
 
 - 创建 Conda 环境（推荐）
 
