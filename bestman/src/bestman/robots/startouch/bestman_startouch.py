@@ -12,7 +12,7 @@ from .startouch_config import StartouchConfig
 from ..factory import register_robot
 
 try:
-    from .startouch_sdk import SingleArm
+    from startouch_python_sdk import StartouchArm
 except ImportError as e:
     raise ImportError(
         "Startouch SDK not available. "
@@ -44,7 +44,7 @@ class BestmanStartouch(BaseRobot):
         """
         建立与 Piper 机械臂的连接
         """
-        self.arm = SingleArm(**self.config.sdk_kwargs)
+        self.arm = StartouchArm(**self.config.sdk_kwargs)
         # pass
         print(f"[{self.config.id or 'startouch'}] Connected successfully.")
 

@@ -20,18 +20,18 @@ dependencies = [
   "numpy",
   "scipy",
 ]
-requires-python = ">= 3.10"
+requires-python = ">= 3.8"
 
 
-[tool.setuptools.package-data]
-"bestman.robots.startouch.startouch_sdk" = ["*.so"]
-"bestman.robots.startouch.startouch_sdk.binaries" = ["**/*.so"]
+#[tool.setuptools.package-data]
+#"bestman.robots.startouch.startouch_sdk" = ["*.so"]
+#"bestman.robots.startouch.startouch_sdk.binaries" = ["**/*.so"]
 
 [project.optional-dependencies]
 
 xarm = ["xarm-python-sdk"]          # pip install bestman[xarm]
 piper = ["piper-sdk"]               # pip install bestman[piper]
-startouch = [] 
+startouch = ["startouch-python-sdk"] 
 ros = ["rclpy"]                     # pip install bestman[ros]
 
 all = ["xarm", "piper","ros"]
