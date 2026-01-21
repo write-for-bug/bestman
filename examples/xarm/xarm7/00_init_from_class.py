@@ -11,12 +11,13 @@ def main():
     )
 
     # Xarm实例
-    robot= BestmanXarm(config)
+    robot: BestmanXarm= BestmanXarm(config)
+    robot.connect()
     # or from factory
     # from bestman.robots import make_robot_from_config
     # robot = make_robot_from_config(config)
     try:
-        robot.connect()
+        
         robot.go_home()
         robot.disconnect()
     except Exception as e:

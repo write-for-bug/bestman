@@ -34,17 +34,18 @@ class BestmanXarm(BaseRobot):
 
     @property
     def observation_features(self) -> Dict[str, Any]:
-        obs = {
-            "joint_pos": (self.config.dof,),
-            "joint_vel": (self.config.dof,),
-            "eef_pos": (6,),#x,y,z,roll,pitch,yaw
-            "eef_vel": (6,),#vx,vy,vz,vr,vp,vy
-            "gripper_pos": float,
-        }
-        for cam_name in self.config.cameras:
-            cam_cfg = self.config.cameras[cam_name]
-            obs[f"image_{cam_name}"] = (cam_cfg.height, cam_cfg.width, 3)
-        return obs
+        pass
+        # obs = {
+        #     "joint_pos": (self.config.dof,),
+        #     "joint_vel": (self.config.dof,),
+        #     "eef_pos": (6,),#x,y,z,roll,pitch,yaw
+        #     "eef_vel": (6,),#vx,vy,vz,vr,vp,vy
+        #     "gripper_pos": float,
+        # }
+        # for cam_name in self.config.cameras:
+        #     cam_cfg = self.config.cameras[cam_name]
+        #     obs[f"image_{cam_name}"] = (cam_cfg.height, cam_cfg.width, 3)
+        # return obs
 
     def connect(self) -> None:
         sdk_kwargs = self.config.sdk_kwargs.copy()
@@ -57,12 +58,13 @@ class BestmanXarm(BaseRobot):
                 self.arm.set_tcp_offset(self.config.tcp_offset,wait=True)
             self.arm.motion_enable(True)
             self.arm.set_mode(0)    #速度位置模式
-            # self.arm.set_state(0)    #运动状态
         except Exception as e:
-            raise e
-        print(f"[{self.config.id or 'xarm6'}] Connected successfully.")
-
+            if self.arm:
+                self.arm.disconnect()
+            self.arm = None  # 确保清理
+            raise ConnectionError(f"Failed to connect to xArm: {e}") from e
         
+        print(f"[{self.config.id or 'xarm6'}] Connected successfully.")
         if hasattr(self.config,"gripper") and self.config.gripper is not None:
             # gripper initialize
             pass
@@ -84,26 +86,27 @@ class BestmanXarm(BaseRobot):
         print(f"[{self.config.id or 'xarm6'}] Disconnected.")
 
     def get_observation(self) -> Dict[str, Any]:
-        angles = self.arm.get_servo_angle()[1]
-        velocities = self.arm.get_joint_states()[1][1]
-        gripper_pos = self.gripper.get_position() if self.gripper else 0.0
+        pass
+        # angles = self.arm.get_servo_angle()[1]
+        # velocities = self.arm.get_joint_states()[1][1]
+        # gripper_pos = self.gripper.get_position() if self.gripper else 0.0
 
-        obs = {
-            "joint_positions": np.array(angles[: self.config.dof], dtype=np.float32),
-            "joint_velocities": np.array(velocities[: self.config.dof], dtype=np.float32),
-            "gripper_position": float(gripper_pos),
-        }
+        # obs = {
+        #     "joint_positions": np.array(angles[: self.config.dof], dtype=np.float32),
+        #     "joint_velocities": np.array(velocities[: self.config.dof], dtype=np.float32),
+        #     "gripper_position": float(gripper_pos),
+        # }
 
-        for name, cam in self.cameras.items():
-            ret, frame = cam.read()
-            if ret:
-                obs[f"image_{name}"] = frame[..., ::-1]  # BGR -> RGB
-            else:
-                cfg = self.config.cameras[name]
-                obs[f"image_{name}"] = np.zeros(
-                    (cfg.height, cfg.width, 3), dtype=np.uint8
-                )
-        return obs
+        # for name, cam in self.cameras.items():
+        #     ret, frame = cam.read()
+        #     if ret:
+        #         obs[f"image_{name}"] = frame[..., ::-1]  # BGR -> RGB
+        #     else:
+        #         cfg = self.config.cameras[name]
+        #         obs[f"image_{name}"] = np.zeros(
+        #             (cfg.height, cfg.width, 3), dtype=np.uint8
+        #         )
+        # return obs
     def action_features(self) -> Dict[str, Any]:
         """
         Declare the structure of action commands.
@@ -339,6 +342,7 @@ class BestmanXarm(BaseRobot):
         """
         raise NotImplementedError("SDK only offers scalar")
         return self.arm.realtime_tcp_speed
+   
    
     def get_gripper_position(self) -> float:
         """

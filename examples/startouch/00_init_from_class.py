@@ -12,7 +12,7 @@ config = StartouchConfig(
     dof=6,                                          
     initial_joints=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],                          
     sdk_kwargs={
-        "can_interface_": "can0" 
+        "can_port": "can0" 
     }
 )
 
