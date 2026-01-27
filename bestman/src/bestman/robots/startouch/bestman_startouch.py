@@ -207,7 +207,7 @@ class BestmanStartouch(BaseRobot):
         Args:
             command: 夹爪指令（0.0~1.0 或具体单位，取决于 GripperInterface 实现）
         """
-        self.arm.setGripperPosition(command)
+        self.arm.setGripperPosition_raw(command)
         
 
     def get_joint_positions(self) -> List[float]:

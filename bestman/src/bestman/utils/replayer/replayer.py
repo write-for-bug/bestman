@@ -88,5 +88,7 @@ class TrajReplayer:
             # 注意：如果 self._robot_sdk 内部非常耗时，会直接影响下一帧的准时性
             # self._robot_sdk(sampled_pose[i], inter_w)
             self.robot.servo_to_ee_pose(sampled_pose[i])
+            self.robot.move_gripper(sampled_clamp[i]/88)
+            # self.robot.move_gripper(0)
         print("轨迹复现完成")
 

@@ -15,8 +15,7 @@ config = StartouchConfig(
     dof=6,                                          
     initial_joints=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],                          
     sdk_kwargs={
-        "can_port": "can0",     
-        "judge_flag": True    
+        "can_port": "can0"
     }
 )
 

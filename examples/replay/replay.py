@@ -20,7 +20,7 @@ DATA_ROOT='/media/ark/B2D6-285E'
 config = StartouchConfig(
     id="startouch",     # 多臂debug以及logger用                   
     dof=6,                                          
-    initial_joints=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0],         #home_关节                 
+    initial_joints=[-0.01468681 , 0.58384833 , 0.23212787 , 0.38242924 ,-0.04100862 , 0.        ],         #home_关节                 
     sdk_kwargs={
         "can_port": "can0" #透传至原sdk的参数
     }
