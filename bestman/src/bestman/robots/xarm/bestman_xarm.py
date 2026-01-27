@@ -324,7 +324,7 @@ class BestmanXarm(BaseRobot):
 
         Returns:
             position: (3,) in meters / 位置：(3,) 米
-            orientation: (4,) quaternion [x, y, z, w] / 姿态：(4,) 四元数 [x, y, z, w]
+            rpy: (3,) 
         """
         position = self.arm.position    
         position[:3] = [x/1000 for x in position[:3]]

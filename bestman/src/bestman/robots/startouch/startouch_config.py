@@ -33,7 +33,7 @@ class StartouchConfig(RobotConfig):
         })
 
     # ========== SDK 必要参数 通信接口检查 ==========
-    necessary_kwargs: ClassVar[List[str]] = ["can_interface_"]
+    necessary_kwargs: ClassVar[List[str]] = ["can_port"]
 
     # ========== 初始化参数 ==========
     initial_joints: Optional[List[float]] = None

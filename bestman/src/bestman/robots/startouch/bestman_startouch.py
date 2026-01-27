@@ -54,7 +54,8 @@ class BestmanStartouch(BaseRobot):
         """
         安全断开连接
         """
-        self.arm.cleanup()
+        if self.arm:
+            self.arm.cleanup()
 
     def get_observation(self) -> Dict[str, Any]:
         pass
@@ -179,7 +180,11 @@ class BestmanStartouch(BaseRobot):
         pose: Union[list, np.ndarray]
     ) -> bool:
         """实时笛卡尔伺服（模式 1，需高频调用）"""
-        pass
+        # if pose.shape != (6,):
+        #     raise ValueError(f"pose must be shape (6,), got {pose.shape}")
+        position = pose[:3]
+        rpy = pose[3:]
+        self.arm.set_end_effector_pose_euler_raw(position,rpy)
 
     def servo_to_ee_pose_rpy(
         self,
@@ -235,7 +240,8 @@ class BestmanStartouch(BaseRobot):
             position: (3,) in meters / 位置：(3,) 米
             orientation: (3,) quaternion [roll, pitch, yaw](degree)角度
         """
-        return self.get_ee_pose_euler()
+        pos,rpy = self.arm.get_ee_pose_euler()
+        return list(pos)+list(rpy)
     
     def get_ee_velocity(self) -> Tuple[np.ndarray, np.ndarray]:
         """
@@ -262,3 +268,4 @@ class BestmanStartouch(BaseRobot):
 
     def __getattr__(self, name):
         pass
+
