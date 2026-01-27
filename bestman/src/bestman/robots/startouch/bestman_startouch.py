@@ -95,8 +95,10 @@ class BestmanStartouch(BaseRobot):
         pass
     
     def go_home(self):
-       self.arm.go_home()
-            
+        if hasattr(self,"initial_joints"):
+            self.arm.set_joint(self.config.initial_joints, tf=1.0)
+        else:
+            self.go_home()
     def move_to_joint_positions(
         self,
         joint_positions: Union[list, np.ndarray],
